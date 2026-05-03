@@ -7,10 +7,10 @@ JSON を更新したらこのファイルも合わせて更新する。
 
 Neo Ergo は Alice 系スプリットレイアウトで、以下の構成を持つ。
 
-- 左右分割された 6+6 のメインキー列（Y/B 列の中間に追加サムキー `\``）
-- 右端に追加マクロ列（行ごとに 1 キー、合計 4 キー）
+- 左右分割された 6+6 のメインキー列
+- 右端に追加マクロ列（縦 4 キー）
 - 右下にインバーテッド T 型の矢印クラスタ
-- 分割スペースバー（左 = SPC、右 = ENT）
+- スペースバーは分割（SPC + ENT）
 - 左サムに複数のモディファイア、右サム側に RGUI
 
 JSON 配列のキー数は各レイヤー 75。
@@ -23,13 +23,11 @@ JSON 配列のキー数は各レイヤー 75。
 | `S⇧` | Mod-Tap: タップで S、ホールドで Left Shift |
 | `L⇧` | Mod-Tap: タップで L、ホールドで Shift（L+R） |
 | `;⌥` | Mod-Tap: タップで `;`、ホールドで Alt（L+R） |
-| `SPC/L2` | Layer-Tap: タップで Space、ホールドで Layer 2 |
+| `SPC/L1` | Layer-Tap: タップで Space、ホールドで Layer 1 |
 | `MO(n)` | Layer-Mod: ホールド中だけ Layer n を有効化 |
 | `M0`〜`M3` | マクロスロット（後述） |
 | `▽` | Transparent（下位レイヤーを透過） |
 | `─` | KC_NO（無効キー） |
-
-各レイアウト図は等幅フォント前提。左右のブロックは物理的な分割を表す。
 
 ## Layer 0 — Base (QWERTY)
 
@@ -42,74 +40,67 @@ JSON 配列のキー数は各レイヤー 75。
 
  LCTL   A⌥    S⇧    D     F     G                       H     J     K    L⇧    ;⌥     '    BSPC   LALT  M2
 
- LSFT   Z     X     C     V     B          `            N     M     ,     .     /     ↑    MO(1)        M3
+ LSFT   Z     X     C     V     B          `            N     M     ,     .     /     ↑    MO(2)        M3
 
-         LALT  RALT  LGUI  NUBS      SPC/L2    ENT     RGUI                          ←     ↓     →
+         LALT  RALT  LGUI  NUBS      SPC/L1    ENT     RGUI                          ←     ↓     →
 ```
 
 ポイント
 
-- ホームロー Mod-Tap: `A=Alt`, `S=Shift`, `L=Shift`, `;=Alt`（タップで通常文字、ホールドでモディファイア）
-- 親指 `SPC` はホールドで Layer 2（ナビ）
-- 右下 `MO(1)` ホールドで Layer 1（ファンクション/RGB/マウス）
-- 中央右の `\`` は Alice 系の中央サムキー
-- 右端列 `M0`〜`M3` は macOS スクリーンショット系マクロ（後述）
+- ホームロー: `A=Alt`, `S=Shift`, `L=Shift`, `;=Alt`（タップで通常文字、ホールドでモディファイア）
+- 親指 `SPC` はホールドで Layer 1（カーソル + マウス、頻用）
+- 右下 `MO(2)` ホールドで Layer 2（ファンクション / RGB、設定系）
+- 中央右の `\`` は Alice 系の追加サムキー
 
-## Layer 1 — Function / RGB / Mouse （`MO(1)` ホールドで起動）
+## Layer 1 — Cursor / Mouse （`SPC` ホールドで起動）
 
-```
- `      F1    F2    F3    F4    F5    F6                F7    F8    F9    F10   F11   F12    ▽     ▽
-
- ▽      ▽     ▽     ▽     ▽     ▽                       ▽     ▽     ▽     ▽    WhDn    ▽     ▽     ▽     ▽
-
- ▽      ▽     ▽     ▽     ▽    NKRO                     ▽     ▽     ▽    WhL   WhU    WhR    ▽     ▽     ▽
-
- ▽     RGBT  RGBM  RGB-  Hue+  Hue-       Sat+          Sat-  Val+  Val-   ▽     ▽    MsUp   ▽            ▽
-
-         ▽     ▽     ▽     ▽         ▽          ▽         ▽                          MsL   MsDn  MsRt
-```
-
-ポイント
-
-- 数字行: `\`` + F1〜F12（`Esc → \``、数字 → ファンクション）
-- `P` 位置: マウスホイール下
-- `G` 位置: NKRO（N-Key Rollover）切替
-- `L`/`;`/`'` 位置: マウスホイール左/上/右
-- `Z`〜`,` の連続: RGB バックライト制御（ON/OFF, モード前送り/後戻し, 色相, 彩度, 明度）
-- `↑` 位置: マウスカーソル上
-- 矢印クラスタ `←/↓/→`: マウスカーソル左/下/右
-
-RGB キーコード対応:
-
-| 表記 | キーコード | 効果 |
-|------|------------|------|
-| `RGBT` | `RGB_TOG` | バックライト ON/OFF |
-| `RGBM` | `RGB_MOD` | エフェクトモード次へ |
-| `RGB-` | `RGB_RMOD` | エフェクトモード前へ |
-| `Hue+` / `Hue-` | `RGB_HUI` / `RGB_HUD` | 色相 増減 |
-| `Sat+` / `Sat-` | `RGB_SAI` / `RGB_SAD` | 彩度 増減 |
-| `Val+` / `Val-` | `RGB_VAI` / `RGB_VAD` | 明度 増減 |
-
-## Layer 2 — Navigation （`SPC` ホールドで起動）
+`▽` は Layer 0 を透過。
 
 ```
  ▽      ▽     ▽     ▽     ▽     ▽     ▽                 ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽
 
- ▽      ▽     ▽     ▽     ▽     ▽                      Home  PgUp   ↑    End    ▽     ▽     ▽     ▽     ▽
+ ▽      ▽    WhU   MsU   WhD    ▽                      Home  PgUp   ↑    End    ▽     ▽     ▽     ▽     ▽
 
- ▽      ▽     ▽     ▽     ▽     ▽                       ▽     ←     ↓     →     ▽     ▽     ▽     ▽     ▽
+ ▽    ACL0   MsL   MsDn  MsR  ACL2                      ←     ↓     →     ▽     ▽     ▽     ▽     ▽     ▽
 
- ▽      ▽     ▽     ▽     ▽     ▽          ▽           PgDn   ▽     ▽     ▽     ▽     ▽     ▽            ▽
+ ▽      ▽    BTN3  BTN2  BTN1   ▽          ▽            ▽     ▽     ▽    PgDn   ▽     ▽     ─           ▽
 
-         ▽     ▽     ▽     ▽         ▽          ▽         ▽                          ▽     ▽     ▽
+         ▽     ▽     ▽     ▽         ▽         BTN1     ▽                          ▽     ▽     ▽
 ```
 
 ポイント
 
-- 右手上段（Y/U/I/O）: Home / PgUp / ↑ / End
-- 右手中段（J/K/L）: ← / ↓ / →
-- 右手下段（N）: PgDn
-- それ以外は Layer 0 を透過
+- マウスカーソルは左手 ESDF（`E`=上, `S`=左, `D`=下, `F`=右）。ホームポジションのまま操作
+- クリックは ESDF の真下列（`V`=BTN1, `C`=BTN2, `X`=BTN3）。指の縦移動だけで打てる
+- 右親指 `ENT` 跡地にも BTN1 を重複配置（両手分担 / 片手完結を選べる）
+- 右手カーソルは旧 Layer 2 と同じ（`Y`/`U`/`I`/`O` = Home/PgUp/↑/End, `H`/`J`/`K` = ←/↓/→, `.` = PgDn）
+- ホイール: `W`=上, `R`=下
+- 加速: `A`=ACL0（精密）, `G`=ACL2（高速）
+- 物理矢印クラスタは透過 → Layer 0 の物理矢印が機能
+- 旧 `MO(1)` 跡地（位置 59）は誤発火防止のため `─`（KC_NO）
+
+## Layer 2 — Function / RGB （`MO(2)` ホールドで起動）
+
+`▽` は Layer 0 を透過。
+
+```
+ `      F1    F2    F3    F4    F5    F6                F7    F8    F9    F10   F11   F12    ▽     ▽
+
+ ▽      ▽     ▽     ▽     ▽     ▽                       ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽
+
+ ▽      ▽     ▽     ▽     ▽    NKRO                     ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽
+
+ ▽    RGBT  RGBM  RGBM' RGBH+ RGBH-      RGBS+         RGBS- RGBV+ RGBV-  ▽     ▽     ▽     ▽           ▽
+
+         ▽     ▽     ▽     ▽         ▽          ▽       ▽                          ▽     ▽     ▽
+```
+
+ポイント
+
+- 数字行: F1〜F12
+- 右小指の `MO(2)` ホールドで起動。設定系を集約
+- NKRO トグルは `G` に
+- RGB バックライト一式（ON/OFF, モード, 色相, 彩度, 明度）は下段 `Z`〜`,` に展開（中央 `` ` `` を含む）
 
 ## Layer 3 — Reserved
 
@@ -145,36 +136,9 @@ VIA / QMK のキーコード仕様は <https://caniusevia.com/docs/specification
 | `MT(mod, kc)` | Mod-Tap（タップ=kc, ホールド=mod） |
 | `LT(layer, kc)` | Layer-Tap（タップ=kc, ホールド=layer 有効化） |
 | `MO(layer)` | ホールド中のみ layer を有効化 |
+| `KC_MS_UP` 他 | マウスカーソル移動（UP/DOWN/LEFT/RIGHT） |
+| `KC_MS_BTN1` 他 | クリック（BTN1=左, BTN2=右, BTN3=中） |
+| `KC_MS_WH_UP` 他 | ホイール（UP/DOWN/LEFT/RIGHT） |
+| `KC_MS_ACCEL0` 他 | カーソル加速モード（0=精密, 2=高速） |
 | `MAGIC_TOGGLE_NKRO` | NKRO（N-Key Rollover）切替 |
 | `RGB_TOG` 他 | RGB バックライト制御 |
-
-## JSON 配列インデックスとキー対応表
-
-`layers[*]` 配列のインデックスと Layer 0 の物理キー対応。新しいレイヤーを編集するときの索引用。
-
-| idx | Layer 0 キー | 行 |
-|-----|--------------|-----|
-| 0–6 | ESC, 1, 2, 3, 4, 5, 6 | row 0 (左) |
-| 7 | `KC_NO` (中央ギャップ) | row 0 |
-| 8–13 | 7, 8, 9, 0, -, = | row 0 (右) |
-| 14–15 | RCTL, M1 | row 0 (右端列) |
-| 16–21 | TAB, Q, W, E, R, T | row 1 (左) |
-| 22–26 | Y, U, I, O, P | row 1 (右) |
-| 27–29 | [, ], \\ | row 1 (右端) |
-| 30 | M0 | row 1 (右端列) |
-| 31–36 | LCTL, A, S, D, F, G | row 2 (左) |
-| 37–42 | H, J, K, L, ;, ' | row 2 (右) |
-| 43–44 | BSPC, LALT | row 2 (右端) |
-| 45 | M2 | row 2 (右端列) |
-| 46–51 | LSFT, Z, X, C, V, B | row 3 (左) |
-| 52 | \` | row 3 (中央サム) |
-| 53–57 | N, M, ,, ., / | row 3 (右) |
-| 58–59 | ↑, MO(1) | row 3 (右端) |
-| 60 | M3 | row 3 (右端列) |
-| 61–64 | LALT, RALT, LGUI, NUBS | row 4 (左サム) |
-| 65 | `KC_NO` | row 4 |
-| 66–67 | SPC/L2, ENT | row 4 (中央サム) |
-| 68–69 | `KC_NO` × 2 | row 4 |
-| 70 | RGUI | row 4 (右サム) |
-| 71 | `KC_NO` | row 4 |
-| 72–74 | ←, ↓, → | row 4 (矢印クラスタ) |

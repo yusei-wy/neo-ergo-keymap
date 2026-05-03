@@ -38,8 +38,8 @@ VIA でエクスポートした `.layout.json` をそのままバージョン管
 ざっくり:
 
 - Layer 0: QWERTY ベース、ホームロー Mod-Tap（A=Alt, S=Shift, L=Shift, ;=Alt）
-- Layer 1: F キー / RGB バックライト / マウス（右下 `MO(1)` ホールド）
-- Layer 2: ナビゲーション（矢印・Home/End/PgUp/PgDn、左サム `SPC` ホールド）
+- Layer 1: カーソル + マウス（左サム `SPC` ホールド）
+- Layer 2: F キー / RGB バックライト（右下 `MO(2)` ホールド）
 - Layer 3: 予約（未使用）
 
 マクロは macOS のスクリーンショット系 3 種 + 画面ロック 1 種。
