@@ -59,11 +59,11 @@ JSON 配列のキー数は各レイヤー 75。
 ```
  ▽      ▽     ▽     ▽     ▽     ▽     ▽                 ▽     ▽     ▽     ▽     ▽     ▽     ▽     ▽
 
- ▽      ▽    WhU   MsU   WhD    ▽                      Home  PgUp   ↑    End    ▽     ▽     ▽     ▽     ▽
+ ▽      ▽    WhU   MsU   WhD    ▽                       ▽   PgUp   ↑    PgDn   ▽     ▽     ▽     ▽     ▽
 
- ▽    ACL0   MsL   MsDn  MsR  ACL2                      ←     ↓     →     ▽     ▽     ▽     ▽     ▽     ▽
+ ▽    ACL0   MsL   MsDn  MsR  ACL2                     Home   ←     ↓     →    End    ▽     ▽     ▽     ▽
 
- ▽      ▽    BTN3  BTN2  BTN1   ▽          ▽            ▽     ▽     ▽    PgDn   ▽     ▽     ─           ▽
+ ▽      ▽    BTN3  BTN2  BTN1   ▽          ▽            ▽     ▽     ▽     ▽     ▽     ▽     ─           ▽
 
          ▽     ▽     ▽     ▽         ▽         BTN1     ▽                          ▽     ▽     ▽
 ```
@@ -73,7 +73,7 @@ JSON 配列のキー数は各レイヤー 75。
 - マウスカーソルは左手 ESDF（`E`=上, `S`=左, `D`=下, `F`=右）。ホームポジションのまま操作
 - クリックは ESDF の真下列（`V`=BTN1, `C`=BTN2, `X`=BTN3）。指の縦移動だけで打てる
 - 右親指 `ENT` 跡地にも BTN1 を重複配置（両手分担 / 片手完結を選べる）
-- 右手カーソルは旧 Layer 2 と同じ（`Y`/`U`/`I`/`O` = Home/PgUp/↑/End, `H`/`J`/`K` = ←/↓/→, `.` = PgDn）
+- 右手カーソルはホーム段に揃えた逆 T 字配置（`J`/`K`/`L` = ←/↓/→, `I` = ↑）。`H`/`;` に Home/End、`U`/`O` に PgUp/PgDn を配置して大ジャンプも素早く打てる
 - ホイール: `W`=上, `R`=下
 - 加速: `A`=ACL0（精密）, `G`=ACL2（高速）
 - 物理矢印クラスタは透過 → Layer 0 の物理矢印が機能
